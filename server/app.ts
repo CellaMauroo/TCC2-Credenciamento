@@ -31,11 +31,11 @@ export function createApp(
   if (
     secure &&
     (!origin.startsWith("https://") ||
-      !process.env.SMTP_HOST ||
+      (process.env.RESEND_API_KEY ? !process.env.MAIL_FROM : !process.env.SMTP_HOST) ||
       !process.env.DATABASE_URL)
   )
     throw new Error(
-      "Produção exige APP_ORIGIN HTTPS, SMTP_HOST e DATABASE_URL.",
+      "Produção exige APP_ORIGIN HTTPS, DATABASE_URL e SMTP_HOST ou Resend com MAIL_FROM.",
     );
   app.disable("x-powered-by");
   if (process.env.TRUST_PROXY === "1") app.set("trust proxy", 1);
