@@ -71,9 +71,10 @@ export function registerCheckin({
             ])
           ).rows[0] || fail(404, "Atividade não encontrada.");
         const event = (
-          await d.query("SELECT status FROM events WHERE id=$1 FOR SHARE", [
-            initial.event_id,
-          ])
+          await d.query(
+            "SELECT status,latitude,longitude FROM events WHERE id=$1 FOR SHARE",
+            [initial.event_id],
+          )
         ).rows[0];
         const a = (
           await d.query("SELECT * FROM activities WHERE id=$1 FOR SHARE", [
@@ -129,6 +130,28 @@ export function registerCheckin({
             400,
             "A localização está desatualizada. Tente capturar novamente.",
             "STALE_LOCATION",
+          );
+        if (event.latitude == null || event.longitude == null)
+          fail(
+            409,
+            "A organização precisa configurar as coordenadas do evento.",
+            "EVENT_LOCATION_REQUIRED",
+          );
+        const radians = Math.PI / 180;
+        const latitudeDelta = (v.location.latitude - event.latitude) * radians;
+        const longitudeDelta =
+          (v.location.longitude - event.longitude) * radians;
+        const arc =
+          Math.sin(latitudeDelta / 2) ** 2 +
+          Math.cos(event.latitude * radians) *
+            Math.cos(v.location.latitude * radians) *
+            Math.sin(longitudeDelta / 2) ** 2;
+        const distance = 2 * 6371000 * Math.asin(Math.sqrt(Math.min(1, arc)));
+        if (distance > 100)
+          fail(
+            403,
+            "Você precisa estar a até 100 m do local do evento.",
+            "OUTSIDE_EVENT_RADIUS",
           );
         const p = (
           await d.query(

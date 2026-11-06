@@ -16,5 +16,7 @@ CREATE INDEX IF NOT EXISTS enrollment_event_idx ON enrollments(event_id);
 CREATE INDEX IF NOT EXISTS challenge_activity_idx ON challenges(activity_id);
 CREATE INDEX IF NOT EXISTS location_received_idx ON location_evidence(received_at);
 ALTER TABLE audit ADD COLUMN IF NOT EXISTS actor_context text NOT NULL DEFAULT 'authenticated_user';
-INSERT INTO schema_migrations(version) VALUES(1),(2) ON CONFLICT DO NOTHING;
+ALTER TABLE events ADD COLUMN IF NOT EXISTS latitude double precision CHECK(latitude BETWEEN -90 AND 90);
+ALTER TABLE events ADD COLUMN IF NOT EXISTS longitude double precision CHECK(longitude BETWEEN -180 AND 180);
+INSERT INTO schema_migrations(version) VALUES(1),(2),(3) ON CONFLICT DO NOTHING;
 COMMIT;

@@ -21,6 +21,8 @@ export const eventSchema = z
     name: z.string().trim().min(3).max(160),
     description: z.string().trim().min(10).max(6000),
     location: z.string().trim().min(2).max(300),
+    latitude: z.number().min(-90).max(90),
+    longitude: z.number().min(-180).max(180),
     timezone: z.string().refine((v) => {
       try {
         new Intl.DateTimeFormat("pt-BR", { timeZone: v });

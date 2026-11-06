@@ -18,6 +18,8 @@ const event = {
   name: "Evento de integração",
   description: "Evento para validar inscrições e presença.",
   location: "Auditório",
+  latitude: -25.44,
+  longitude: -49.27,
   timezone: "America/Sao_Paulo",
   starts_at: "2026-11-06T14:00:00Z",
   ends_at: "2026-11-06T20:00:00Z",
@@ -250,6 +252,14 @@ test("não inscrito, dados ausentes ou inválidos, QR inválido e localização 
     ...payload(),
     location: { ...location(), captured_at: "2026-11-06T14:00:00Z" },
   }).expect(400);
+});
+test("posição fora do raio de 100 m é recusada", async () => {
+  const result = await send(student, `/activities/${activityId}/check-in`, {
+    ...payload(),
+    location: { ...location(), latitude: -25.439 },
+  }).expect(403);
+  assert.equal(result.body.code, "OUTSIDE_EVENT_RADIUS");
+  assert.equal((await db.query("SELECT id FROM attendances")).rows.length, 0);
 });
 test("QR expirado, revogado, janela e fechamento invalidam confirmação", async () => {
   clock = new Date("2026-11-06T15:03:00Z");

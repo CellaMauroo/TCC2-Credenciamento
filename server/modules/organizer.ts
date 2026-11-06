@@ -47,7 +47,7 @@ export function registerOrganizer({
       const eid = randomUUID();
       await db.transaction(async (d) => {
         await d.query(
-          "INSERT INTO events(id,owner_id,name,description,location,timezone,starts_at,ends_at,registration_starts_at,registration_ends_at) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
+          "INSERT INTO events(id,owner_id,name,description,location,timezone,starts_at,ends_at,registration_starts_at,registration_ends_at,latitude,longitude) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
           [
             eid,
             uid,
@@ -59,6 +59,8 @@ export function registerOrganizer({
             v.ends_at,
             v.registration_starts_at,
             v.registration_ends_at,
+            v.latitude,
+            v.longitude,
           ],
         );
         await d.query(
@@ -111,7 +113,7 @@ export function registerOrganizer({
         if (acts.length)
           fail(400, "O período precisa conter todas as atividades.");
         await d.query(
-          "UPDATE events SET name=$1,description=$2,location=$3,timezone=$4,starts_at=$5,ends_at=$6,registration_starts_at=$7,registration_ends_at=$8 WHERE id=$9",
+          "UPDATE events SET name=$1,description=$2,location=$3,timezone=$4,starts_at=$5,ends_at=$6,registration_starts_at=$7,registration_ends_at=$8,latitude=$9,longitude=$10 WHERE id=$11",
           [
             v.name,
             v.description,
@@ -121,6 +123,8 @@ export function registerOrganizer({
             v.ends_at,
             v.registration_starts_at,
             v.registration_ends_at,
+            v.latitude,
+            v.longitude,
             e.id,
           ],
         );

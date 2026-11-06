@@ -1536,9 +1536,14 @@ function EventForm() {
         string
       >;
       for (const [key] of eventDateFields) f[key] = toInstant(f[key], tz);
+      const event = {
+        ...f,
+        latitude: Number(f.latitude),
+        longitude: Number(f.longitude),
+      };
       const r = id
-        ? await put(`/organizer/events/${id}`, f)
-        : await post("/organizer/events", f);
+        ? await put(`/organizer/events/${id}`, event)
+        : await post("/organizer/events", event);
       nav(`/organizador/${id || r.id}`);
     } catch (ex) {
       setErr((ex as Error).message);
@@ -1590,6 +1595,29 @@ function EventForm() {
           placeholder="Campus, auditório ou sala"
           required
         />
+        <Field
+          label="Latitude do local"
+          name="latitude"
+          type="number"
+          step="any"
+          min={-90}
+          max={90}
+          defaultValue={data?.latitude}
+          required
+        />
+        <Field
+          label="Longitude do local"
+          name="longitude"
+          type="number"
+          step="any"
+          min={-180}
+          max={180}
+          defaultValue={data?.longitude}
+          required
+        />
+        <p>
+          O check-in exige que o aluno esteja a até 100 m dessas coordenadas.
+        </p>
         <label className="field">
           <span>Fuso horário do evento</span>
           <select
@@ -2288,10 +2316,9 @@ function Privacy() {
       </p>
       <h2>Por que solicitamos a posição</h2>
       <p>
-        A localização compõe a evidência da tentativa de entrada na atividade.
-        Não há rastreamento contínuo. Nesta versão, a posição é registrada sem
-        bloqueio por distância. QR Code e localização não comprovam de forma
-        absoluta identidade ou presença física.
+        A localização compõe a evidência da tentativa de entrada na atividade. O
+        servidor aceita novas presenças a até 100 m das coordenadas do evento. A
+        localização é solicitada no momento da confirmação.
       </p>
       <h2>Acesso e relatórios</h2>
       <p>
