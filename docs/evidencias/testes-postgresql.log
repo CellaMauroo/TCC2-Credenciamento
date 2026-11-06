@@ -1,0 +1,36 @@
+
+> credencia@1.0.0 test:postgres
+> tsx scripts/test-postgres.ts
+
+✔ cadastro público ignora privilégios, cookie HttpOnly e tokens de uso único (3514.226337ms)
+✔ autenticação, CSRF e origem bloqueiam mutações indevidas (16.493567ms)
+✔ criar evento e atividade, ocultar rascunho e publicar (68.579997ms)
+✔ organizador não pode acessar eventos, inscritos, relatórios e atividades alheios (21.780794ms)
+✔ inscrição idempotente e concorrente, consulta de inscritos (94.015279ms)
+✔ GET do QR não registra presença; código válido identifica apenas a atividade (29.549225ms)
+✔ não inscrito, dados ausentes ou inválidos, QR inválido e localização antiga são recusados (27.529192ms)
+✔ QR expirado, revogado, janela e fechamento invalidam confirmação (37.198251ms)
+✔ 50 confirmações simultâneas: uma presença, uma evidência e uma atribuição de horas (210.478045ms)
+✔ consulta após perda de resposta, repetição após fechamento e horas imutáveis (34.60599ms)
+✔ CSV neutraliza fórmulas, omite coordenadas; painel distingue pessoas e check-ins (15.026829ms)
+✔ recuperação: token expira e uso único; troca invalida sessões (1805.314847ms)
+✔ 500 inscritos, rajada de 50 alunos diferentes: p95 e integridade (368.07756ms)
+✔ encerrar preserva histórico, fecha check-in e impede reabertura (24.686383ms)
+✔ backup/restauração PGlite e reinício preservam registros (3698.008598ms)
+✔ limitador isola endereços de login na mesma rede (61.226312ms)
+✔ retenção remove coordenadas vencidas e preserva presenças e minutos (8.434358ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10742.599122
+PostgreSQL 18.6 on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0, 64-bit
+Backup físico, restauração e reinício PostgreSQL: 51 presenças preservadas.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

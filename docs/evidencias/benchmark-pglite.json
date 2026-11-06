@@ -1,0 +1,7 @@
+{
+  "engine": "PGlite",
+  "enrolled": 500,
+  "concurrent": 50,
+  "p95_ms": 548,
+  "max_ms": 548
+}

@@ -1,0 +1,43 @@
+
+> credencia@1.0.0 test
+> tsx --test tests/*.test.ts
+
+✔ cadastro público ignora privilégios, cookie HttpOnly e tokens de uso único (6393.015775ms)
+✔ autenticação, CSRF e origem bloqueiam mutações indevidas (16.677857ms)
+✔ criar evento e atividade, ocultar rascunho e publicar (80.08919ms)
+✔ organizador não pode acessar eventos, inscritos, relatórios e atividades alheios (54.076316ms)
+✔ inscrição idempotente e concorrente, consulta de inscritos (91.257611ms)
+✔ GET do QR não registra presença; código válido identifica apenas a atividade (41.528857ms)
+✔ não inscrito, dados ausentes ou inválidos, QR inválido e localização antiga são recusados (50.23123ms)
+✔ QR expirado, revogado, janela e fechamento invalidam confirmação (87.089271ms)
+✔ 50 confirmações simultâneas: uma presença, uma evidência e uma atribuição de horas (398.595934ms)
+✔ consulta após perda de resposta, repetição após fechamento e horas imutáveis (51.323556ms)
+✔ CSV neutraliza fórmulas, omite coordenadas; painel distingue pessoas e check-ins (17.772376ms)
+✔ recuperação: token expira e uso único; troca invalida sessões (2075.669525ms)
+✔ 500 inscritos, rajada de 50 alunos diferentes: p95 e integridade (1357.189139ms)
+✔ encerrar preserva histórico, fecha check-in e impede reabertura (25.481739ms)
+✔ backup/restauração PGlite e reinício preservam registros (3152.936954ms)
+✔ limitador isola endereços de login na mesma rede (56.39803ms)
+✔ retenção remove coordenadas vencidas e preserva presenças e minutos (7.423925ms)
+✔ geolocalização nova, alta precisão, timeout e preservação do horário/precisão (2.021857ms)
+✔ permissão negada fornece orientação recuperável (0.668763ms)
+✔ timeout e posição indisponível fornecem mensagens específicas (0.356058ms)
+✔ localização bloqueada em contexto inseguro (0.222774ms)
+✔ sem conexão nunca retorna confirmação de presença (0.638847ms)
+✔ SMTP entrega o link de confirmação sem depender de serviço externo (92.77516ms)
+✔ React: explorar, detalhes, redirecionamento ao login, inscrição e histórico (566.860855ms)
+✔ React: busca filtra eventos e estados vazios são legíveis (147.613696ms)
+✔ React: negar localização não grava; perda de resposta consulta o resultado persistido (194.508283ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18183.773451
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,7 @@
+{
+  "engine": "PostgreSQL",
+  "enrolled": 500,
+  "concurrent": 50,
+  "p95_ms": 160,
+  "max_ms": 160
+}
