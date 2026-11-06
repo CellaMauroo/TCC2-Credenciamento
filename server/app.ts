@@ -43,7 +43,7 @@ export function createApp(
     helmet({
       contentSecurityPolicy: {
         directives: {
-          "img-src": ["'self'", "data:"],
+          "img-src": ["'self'", "data:", "https://tile.openstreetmap.org"],
           "style-src": ["'self'", "'unsafe-inline'"],
           "script-src": ["'self'"],
           "upgrade-insecure-requests": secure ? [] : null,

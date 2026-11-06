@@ -1,3 +1,4 @@
+import { EventLocationPicker } from "./EventLocationPicker";
 import React, {
   useState,
   useEffect,
@@ -1595,29 +1596,11 @@ function EventForm() {
           placeholder="Campus, auditório ou sala"
           required
         />
-        <Field
-          label="Latitude do local"
-          name="latitude"
-          type="number"
-          step="any"
-          min={-90}
-          max={90}
-          defaultValue={data?.latitude}
-          required
+        <EventLocationPicker
+          key={id || "new"}
+          latitude={data?.latitude}
+          longitude={data?.longitude}
         />
-        <Field
-          label="Longitude do local"
-          name="longitude"
-          type="number"
-          step="any"
-          min={-180}
-          max={180}
-          defaultValue={data?.longitude}
-          required
-        />
-        <p>
-          O check-in exige que o aluno esteja a até 100 m dessas coordenadas.
-        </p>
         <label className="field">
           <span>Fuso horário do evento</span>
           <select
